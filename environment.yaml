@@ -1,0 +1,18 @@
+name: crop
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - pytorch
+  - torchvision
+  - torchaudio
+  - cudatoolkit=10.2
+  - torchgeo
+  - jupyter
+  - rioxarray
+  - seaborn
+  - black
+  - flake8
+  - geopandas
+  - scikit-image

@@ -1,15 +1,46 @@
-# Project
+# TerraVibes Tech Session - 2022 Digital Ag Hackathon 
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+This repo contains code and tutorials for the TerraVibes Tech Session at the 2022 Digital Ag Hackathon by Cornell. TerraVibes is a research platform/tool for obtaining unique and deep insights from curated earth observation data and build models by combining them with other earth observation modalities.
 
-As the maintainer of this project, please make a few updates:
+## Azure VM Setup
+Details on how to set up your vitual machine and download the available data from blob storage are provided in the `azure_tutorial.pdf` document.
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+## Downloading the data
+You can download the data from blob storage using the links below. We recommend using [azcopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-ref-azcopy) (for more information check `azure_tutorial.pdf`). To get access, add the provided SAS token in the `<SAS-TOKEN>` placeholder in the commands below. Change the `<DATA-DIR>` placeholder below to the local directory of your preference.
+1. To download the preprocessed NDVI data use following command:
 
+```
+azcopy copy "https://digitalag22.blob.core.windows.net/ndvi?<SAS-TOKEN>" <DATA-DIR> --recursive
+
+```
+
+2. To download the SpaceEye data use following command:
+
+```
+azcopy copy "https://digitalag22.blob.core.windows.net/spaceeye-data?<SAS-TOKEN>" <DATA-DIR> --recursive
+
+```
+
+We recommend downloading the data before going through the notebooks. 
+
+## Creating the environment
+
+We recommend using [conda](https://docs.conda.io/en/latest/) to manage the packages required on this project. The dependencies are defined in the file `environment.yaml`. A conda environment can be created using the command below:
+
+```
+conda env create -f environment.yaml
+```
+
+## About the notebooks
+
+There are two notebooks included in this tutorial. The first notebook is an exploration of the provided SpaceEye and NDVI data, where we demonstrate how to load and visualize the provided multispectral images, as well as how to compute vegetation indices such as the Normalized Difference Vegeration Index (NDVI). NDVI is a vegetation index widely used for environmental impact assessment, agricultural evaluation, and land use change metrics. It evaluates vegetation by estimating the contrast between near infrared (which vegetation strongly reflects) and red light (which vegetation absorbs).
+
+The second notebook demonstrates how to train a UNet to segment crops using NDVI timeseries from SpaceEye and CDL as ground-truth data. The network is trained on chips/patches of NDVI values over the whole year. Targets come from CDL at 30m resolution and are upsampled to 10m resolution via nearest neighbor interpolation. 
+
+We provide two years (2019 and 2020) of daily cloud-free Sentinel 2 images computed via SpaceEye and preprocessed NDVI values at a 10-day interval for a 10800km² area in Washington state. This data can be used with the provided code or for other activities in the hackathon.
+
+## About SpaceEye
+The tutorial showcases SpaceEye, which is a neural-network-based solution to recover pixels occluded by clouds in satellite images. SpaceEye leverages radio frequency (RF) signals in the ultra/super-high frequency band that penetrate clouds to help reconstruct the occluded regions in multispectral images. We introduce the first multi-modal multi-temporal cloud removal model that uses publicly available satellite observations and produces daily cloud-free images.
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
