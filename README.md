@@ -23,8 +23,12 @@ azcopy copy "https://digitalag22.blob.core.windows.net/spaceeye-data?<SAS-TOKEN>
 
 We recommend downloading the data before going through the notebooks. 
 
-In addition to that, if you want to merge the Space Eye data, you can use `grid_epsg_5070.geojson` (EPSG:5070 the same CRS as CDL) or `grid_epsg_4326.geojson`(CRS EPSG:4326)
+In addition to that, if you want to merge the Space Eye data, you can use `grid_epsg_5070.geojson` (EPSG:5070 the same CRS as CDL) or `grid_epsg_4326.geojson`(CRS EPSG:4326). If you want to read it, run on a notebook:
 
+```
+import geopandas as gpd
+df = gpd.read_file("grid_epsg_4326.geojson").set_crs("epsg:4326")
+```
 
 ## Creating the environment
 
