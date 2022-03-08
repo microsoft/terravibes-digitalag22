@@ -23,13 +23,6 @@ azcopy copy "https://digitalag22.blob.core.windows.net/spaceeye-data?<SAS-TOKEN>
 
 We recommend downloading the data before going through the notebooks. 
 
-In addition to that, if you want to merge the Space Eye data, you can use `grid_epsg_5070.geojson` (EPSG:5070 the same CRS as CDL) or `grid_epsg_4326.geojson`(CRS EPSG:4326). If you want to read it, run on a notebook:
-
-```
-import geopandas as gpd
-df = gpd.read_file("grid_epsg_4326.geojson").set_crs("epsg:4326")
-```
-
 ## Creating the environment
 
 We recommend using [conda](https://docs.conda.io/en/latest/) to manage the packages required on this project. The dependencies are defined in the file `environment.yaml`. A conda environment can be created using the command below:
@@ -44,7 +37,20 @@ There are two notebooks included in this tutorial. The first notebook is an expl
 
 The second notebook demonstrates how to train a UNet to segment crops using NDVI timeseries from SpaceEye and CDL as ground-truth data. The network is trained on chips/patches of NDVI values over the whole year. Targets come from CDL at 30m resolution and are upsampled to 10m resolution via nearest neighbor interpolation. 
 
+## Data format
+
 We provide two years (2019 and 2020) of daily cloud-free Sentinel 2 images computed via SpaceEye and preprocessed NDVI values at a 10-day interval for a 10800km² area in Washington state. This data can be used with the provided code or for other activities in the hackathon.
+
+NDVI data is provided as two tiff files (for 2019 and 2020, respectively), each with 37 bands. Each band provides NDVI values for one day (starting at Jan. 1st), with a 10-day interval between successive bands).
+
+Each day of SpaceEye data is separated in a grid, with each cell being a separate tiff file. We provide the regions covered by each grid cell (and the total region of interest) in GeoJSON files with two different coordinate systems (CRSs): `grid_epsg_5070.geojson` (`EPSG:5070`, the same CRS as CDL rasters), or `grid_epsg_4326.geojson` (`EPSG:4326`, WGS84, lat-long). The grid is shown in the image below.
+![spaceeye_grid](https://user-images.githubusercontent.com/4806997/157137974-d306ace0-83d1-4f61-a719-782a42ad2979.png)
+
+You can read the files using geopandas
+```
+import geopandas as gpd
+df = gpd.read_file("grid_epsg_4326.geojson").set_crs("epsg:4326")
+```
 
 ## About SpaceEye
 The tutorial showcases SpaceEye, which is a neural-network-based solution to recover pixels occluded by clouds in satellite images. SpaceEye leverages radio frequency (RF) signals in the ultra/super-high frequency band that penetrate clouds to help reconstruct the occluded regions in multispectral images. We introduce the first multi-modal multi-temporal cloud removal model that uses publicly available satellite observations and produces daily cloud-free images.
