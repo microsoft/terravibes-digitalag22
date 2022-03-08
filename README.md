@@ -54,6 +54,9 @@ df = gpd.read_file("grid_epsg_4326.geojson").set_crs("epsg:4326")
 
 ## About SpaceEye
 The tutorial showcases SpaceEye, which is a neural-network-based solution to recover pixels occluded by clouds in satellite images. SpaceEye leverages radio frequency (RF) signals in the ultra/super-high frequency band that penetrate clouds to help reconstruct the occluded regions in multispectral images. We introduce the first multi-modal multi-temporal cloud removal model that uses publicly available satellite observations and produces daily cloud-free images.
+
+[1] M. Zhao, P. A. Olsen, and R. Chandra, “Seeing Through Clouds in Satellite Images,” arXiv:2106.08408, Jun. 2021, Accessed: Mar. 07, 2022. [Online]. Available: http://arxiv.org/abs/2106.08408
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
