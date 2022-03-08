@@ -31,6 +31,10 @@ We recommend using [conda](https://docs.conda.io/en/latest/) to manage the packa
 conda env create -f environment.yaml
 ```
 
+You should then activate the environment to have access to all the installed requirements.
+```
+conda activate crop
+```
 ## About the notebooks
 
 There are two notebooks included in this tutorial. The first notebook is an exploration of the provided SpaceEye and NDVI data, where we demonstrate how to load and visualize the provided multispectral images, as well as how to compute vegetation indices such as the Normalized Difference Vegeration Index (NDVI). NDVI is a vegetation index widely used for environmental impact assessment, agricultural evaluation, and land use change metrics. It evaluates vegetation by estimating the contrast between near infrared (which vegetation strongly reflects) and red light (which vegetation absorbs).
