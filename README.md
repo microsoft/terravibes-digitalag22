@@ -41,7 +41,7 @@ The second notebook demonstrates how to train a UNet to segment crops using NDVI
 
 We provide two years (2019 and 2020) of daily cloud-free Sentinel 2 images computed via SpaceEye and preprocessed NDVI values at a 10-day interval for a 10800km² area in Washington state. This data can be used with the provided code or for other activities in the hackathon.
 
-NDVI data is provided as two tiff files (for 2019 and 2020, respectively), each with 37 bands. Each band provides NDVI values for one day (starting at Jan. 1st), with a 10-day interval between successive bands).
+NDVI data is provided as two tiff files (for 2019 and 2020, respectively), each with 37 bands. Each band provides NDVI values for one day (starting at Jan. 1st), with a 10-day interval between successive bands.
 
 Each day of SpaceEye data is separated in a grid, with each cell being a separate tiff file. We provide the regions covered by each grid cell (and the total region of interest) in GeoJSON files with two different coordinate systems (CRSs): `grid_epsg_5070.geojson` (`EPSG:5070`, the same CRS as CDL rasters), or `grid_epsg_4326.geojson` (`EPSG:4326`, WGS84, lat-long). The grid is shown in the image below.
 ![spaceeye_grid](https://user-images.githubusercontent.com/4806997/157137974-d306ace0-83d1-4f61-a719-782a42ad2979.png)
