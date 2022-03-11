@@ -49,7 +49,9 @@ class CropDataModule(pl.LightningDataModule):
 
     def setup(self, stage=None):
         input_dataset = NDVIDataset(self.root_dir)
-        target_dataset = CDLMask(self.root_dir, positive_indices=self.positive_indices)
+        target_dataset = CDLMask(
+            self.root_dir, positive_indices=self.positive_indices, years=self.years, download=False
+        )
         self.train_dataset = input_dataset & target_dataset  # Intersection dataset
         # Use the same dataset for training and validation, use different RoIs
         self.val_dataset = self.train_dataset
